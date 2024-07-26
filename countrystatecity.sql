@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 12, 2024 at 07:22 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jul 26, 2024 at 07:28 AM
+-- Server version: 8.3.0
+-- PHP Version: 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test`
+-- Database: `countrystatecity`
 --
 
 -- --------------------------------------------------------
@@ -27,13 +27,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `cities`
 --
 
-CREATE TABLE `cities` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `state_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `cities`;
+CREATE TABLE IF NOT EXISTS `cities` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48357 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `cities`
@@ -4588,8 +4590,8 @@ INSERT INTO `cities` (`id`, `name`, `state_id`, `created_at`, `updated_at`) VALU
 (4543, 'Alapur', 38, NULL, NULL),
 (4544, 'Aliganj', 38, NULL, NULL),
 (4545, 'Aligarh', 38, NULL, NULL),
-(4546, 'Allahabad', 38, NULL, NULL),
-(4547, 'Allahabad Cantonment', 38, NULL, NULL),
+(4546, 'Prayagraj', 38, NULL, NULL),
+(4547, 'Prayagraj Cantonment', 38, NULL, NULL),
 (4548, 'Allahganj', 38, NULL, NULL),
 (4549, 'Amanpur', 38, NULL, NULL),
 (4550, 'Ambahta', 38, NULL, NULL),
@@ -48022,14 +48024,16 @@ INSERT INTO `cities` (`id`, `name`, `state_id`, `created_at`, `updated_at`) VALU
 -- Table structure for table `countries`
 --
 
-CREATE TABLE `countries` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `sortname` varchar(255) NOT NULL,
-  `phonecode` varchar(255) NOT NULL,
+DROP TABLE IF EXISTS `countries`;
+CREATE TABLE IF NOT EXISTS `countries` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sortname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phonecode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `countries`
@@ -48289,28 +48293,29 @@ INSERT INTO `countries` (`id`, `name`, `sortname`, `phonecode`, `created_at`, `u
 -- Table structure for table `dropdouns`
 --
 
-CREATE TABLE `dropdouns` (
-  `id` int(11) NOT NULL,
-  `country_id` int(12) NOT NULL,
-  `state_id` int(12) NOT NULL,
-  `city_id` int(12) NOT NULL,
+DROP TABLE IF EXISTS `dropdouns`;
+CREATE TABLE IF NOT EXISTS `dropdouns` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `country_id` int NOT NULL,
+  `state_id` int NOT NULL,
+  `city_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `dropdouns`
 --
 
-INSERT INTO `dropdouns` (`id`, `country_id`, `state_id`, `city_id`, `created_at`, `updated_at`) VALUES
-(1, 101, 38, 5216, '2024-02-12 00:45:56', '2024-02-12 00:45:56'),
-(2, 101, 38, 5217, '2024-02-12 00:45:56', '2024-02-12 00:45:56'),
-(3, 101, 38, 5218, '2024-02-12 00:45:56', '2024-02-12 00:45:56'),
-(4, 3, 115, 6099, '2024-02-12 00:48:28', '2024-02-12 00:48:28'),
-(5, 3, 115, 6100, '2024-02-12 00:48:28', '2024-02-12 00:48:28'),
-(6, 3, 115, 6101, '2024-02-12 00:48:28', '2024-02-12 00:48:28'),
-(7, 101, 38, 4546, '2024-02-12 00:52:22', '2024-02-12 00:52:22'),
-(8, 101, 38, 4575, '2024-02-12 00:52:22', '2024-02-12 00:52:22');
+INSERT INTO `dropdouns` (`id`, `name`, `country_id`, `state_id`, `city_id`, `created_at`, `updated_at`) VALUES
+(1, 'shubham kumar', 101, 38, 4546, '2024-07-26 01:21:46', '2024-07-26 01:21:46'),
+(2, 'Colby Lewis', 3, 116, 6105, '2024-07-26 01:42:38', '2024-07-26 01:42:38'),
+(6, 'Nathan Wynn', 57, 915, 14612, '2024-07-26 01:51:43', '2024-07-26 01:51:43'),
+(7, 'April Walter', 173, 2838, 32227, '2024-07-26 01:53:21', '2024-07-26 01:53:21'),
+(8, 'Scarlett Yang', 108, 1908, 24108, '2024-07-26 01:54:24', '2024-07-26 01:54:24'),
+(9, 'Zahir Hodge', 131, 2282, 26889, '2024-07-26 01:54:59', '2024-07-26 01:54:59');
 
 -- --------------------------------------------------------
 
@@ -48318,14 +48323,17 @@ INSERT INTO `dropdouns` (`id`, `country_id`, `state_id`, `city_id`, `created_at`
 -- Table structure for table `failed_jobs`
 --
 
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -48334,11 +48342,13 @@ CREATE TABLE `failed_jobs` (
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -48356,10 +48366,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `password_reset_tokens`
 --
 
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+DROP TABLE IF EXISTS `password_reset_tokens`;
+CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -48368,17 +48380,21 @@ CREATE TABLE `password_reset_tokens` (
 -- Table structure for table `personal_access_tokens`
 --
 
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -48387,13 +48403,15 @@ CREATE TABLE `personal_access_tokens` (
 -- Table structure for table `states`
 --
 
-CREATE TABLE `states` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `country_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `states`;
+CREATE TABLE IF NOT EXISTS `states` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `states`
@@ -52500,130 +52518,19 @@ INSERT INTO `states` (`id`, `name`, `country_id`, `created_at`, `updated_at`) VA
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cities`
---
-ALTER TABLE `cities`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `countries`
---
-ALTER TABLE `countries`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `dropdouns`
---
-ALTER TABLE `dropdouns`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_reset_tokens`
---
-ALTER TABLE `password_reset_tokens`
-  ADD PRIMARY KEY (`email`);
-
---
--- Indexes for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
-
---
--- Indexes for table `states`
---
-ALTER TABLE `states`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `cities`
---
-ALTER TABLE `cities`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48357;
-
---
--- AUTO_INCREMENT for table `countries`
---
-ALTER TABLE `countries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
-
---
--- AUTO_INCREMENT for table `dropdouns`
---
-ALTER TABLE `dropdouns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `states`
---
-ALTER TABLE `states`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4122;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

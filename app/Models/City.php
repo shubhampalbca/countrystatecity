@@ -17,4 +17,12 @@ class City extends Model
     protected $fillable = [
         'name', 'state_id'
     ];
+
+
+    public function dropdouns()
+    {
+        return $this->hasMany(Dropdoun::class);
+    }
 }
+
+

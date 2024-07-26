@@ -16,7 +16,26 @@ class Dropdoun extends Model
      */
 
      protected $table = 'dropdouns';
-    protected $fillable = [
-        'country_id', 'state_id', 'city_id'
+     protected $fillable = [
+        'country_id', 'state_id', 'city_id','name'
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+
+
+
 }

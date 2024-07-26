@@ -13,4 +13,12 @@ class Country extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function dropdouns()
+    {
+        return $this->hasMany(Dropdoun::class);
+    }
 }
+
+
+

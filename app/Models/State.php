@@ -16,4 +16,9 @@ class State extends Model
     protected $fillable = [
         'name', 'country_id'
     ];
+
+    public function dropdouns()
+    {
+        return $this->hasMany(Dropdoun::class);
+    }
 }

@@ -16,6 +16,18 @@ class DropdownController extends Controller
      * Write code on Method
     
      */
+
+
+     public function view()
+        {
+            $result = Dropdoun::with(['country', 'state', 'city'])->get();
+             
+            return view('welcome', compact('result'));
+        }
+ 
+     
+
+
     public function index()
     {
         $data['countries'] = Country::get(["name", "id"]);
@@ -60,26 +72,29 @@ class DropdownController extends Controller
 
     public function select(Request $request)
     {
+   
         $country_id = $request->input('country_id');
         $state_id = $request->input('state_id');
         $city_id = $request->input('city_id');
+        $name = $request->input('name');
     
         if (is_array($city_id)) {
-            foreach ($city_id as $name) {
+            foreach ($city_id as $cityid) {
                 $user = new Dropdoun;
                 $user->country_id = $country_id;
+                $user->name = $name;
                 $user->state_id = $state_id;
-                $user->city_id = $name;
+                $user->city_id = $cityid;
                 $user->save();
             }
     
-            return redirect()->back()->with('status', 'Test Added Successfully');
+            return redirect('/')->with('status', 'Test Added Successfully');
+
         } else {
            
             return redirect()->back()->with('error', 'Invalid data for cs_id');
         }
     }
     
-
 
 }
