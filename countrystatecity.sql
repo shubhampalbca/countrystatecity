@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 26, 2024 at 07:28 AM
+-- Generation Time: Jan 20, 2026 at 11:17 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -24,13 +24,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cache`
+--
+
+DROP TABLE IF EXISTS `cache`;
+CREATE TABLE IF NOT EXISTS `cache` (
+  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache_locks`
+--
+
+DROP TABLE IF EXISTS `cache_locks`;
+CREATE TABLE IF NOT EXISTS `cache_locks` (
+  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cities`
 --
 
 DROP TABLE IF EXISTS `cities`;
 CREATE TABLE IF NOT EXISTS `cities` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `state_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -48027,9 +48055,9 @@ INSERT INTO `cities` (`id`, `name`, `state_id`, `created_at`, `updated_at`) VALU
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sortname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phonecode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sortname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phonecode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -48296,26 +48324,14 @@ INSERT INTO `countries` (`id`, `name`, `sortname`, `phonecode`, `created_at`, `u
 DROP TABLE IF EXISTS `dropdouns`;
 CREATE TABLE IF NOT EXISTS `dropdouns` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `country_id` int NOT NULL,
   `state_id` int NOT NULL,
   `city_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `dropdouns`
---
-
-INSERT INTO `dropdouns` (`id`, `name`, `country_id`, `state_id`, `city_id`, `created_at`, `updated_at`) VALUES
-(1, 'shubham kumar', 101, 38, 4546, '2024-07-26 01:21:46', '2024-07-26 01:21:46'),
-(2, 'Colby Lewis', 3, 116, 6105, '2024-07-26 01:42:38', '2024-07-26 01:42:38'),
-(6, 'Nathan Wynn', 57, 915, 14612, '2024-07-26 01:51:43', '2024-07-26 01:51:43'),
-(7, 'April Walter', 173, 2838, 32227, '2024-07-26 01:53:21', '2024-07-26 01:53:21'),
-(8, 'Scarlett Yang', 108, 1908, 24108, '2024-07-26 01:54:24', '2024-07-26 01:54:24'),
-(9, 'Zahir Hodge', 131, 2282, 26889, '2024-07-26 01:54:59', '2024-07-26 01:54:59');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -48326,11 +48342,11 @@ INSERT INTO `dropdouns` (`id`, `name`, `country_id`, `state_id`, `city_id`, `cre
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -48345,7 +48361,7 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -48368,8 +48384,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 DROP TABLE IF EXISTS `password_reset_tokens`;
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -48383,11 +48399,11 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
 DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -48406,7 +48422,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 DROP TABLE IF EXISTS `states`;
 CREATE TABLE IF NOT EXISTS `states` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `country_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -52521,11 +52537,11 @@ INSERT INTO `states` (`id`, `name`, `country_id`, `created_at`, `updated_at`) VA
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),

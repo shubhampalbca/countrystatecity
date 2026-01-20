@@ -1,83 +1,51 @@
 <?php
-  
+
 namespace App\Http\Controllers;
-  
+
 use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Dropdoun;
 
-use Illuminate\Support\Facades\DB;
-  
 class DropdownController extends Controller
 {
-    /**
-     * Write code on Method
-    
-     */
 
-
-     public function view()
-        {
-            $result = Dropdoun::with(['country', 'state', 'city'])->get();
-             
-            return view('welcome', compact('result'));
-        }
- 
-     
-
+    public function view()
+    {
+        $result = Dropdoun::with(['country', 'state', 'city'])->get();
+        return view('welcome', compact('result'));
+    }
 
     public function index()
     {
         $data['countries'] = Country::get(["name", "id"]);
         return view('dropdown', $data);
     }
-    /**
-     * Write code on Method
-     *
-  
-     */
+
     public function fetchState(Request $request)
     {
         $data['states'] = State::where("country_id", $request->country_id)
-                                ->get(["name", "id"]);
-  
+            ->get(["name", "id"]);
+
         return response()->json($data);
     }
-    /**
-     * Write code on Method
-     *
-   
-     */
     public function fetchCity(Request $request)
     {
         $data['cities'] = City::where("state_id", $request->state_id)
-                                    ->get(["name", "id"]);
-                                      
+            ->get(["name", "id"]);
+
         return response()->json($data);
     }
 
-    // public function select(Request $request)
-    // {
-    //     $c_id = $request->input('c_id');
-    //     $s_id = $request->input('s_id');
-    //     $cs_id = $request->input('cs_id');
-       
-    //     $data=array('c_id'=>$c_id,"s_id"=>$s_id,"cs_id"=>$cs_id);
-    //     DB::table('dropdoun')->insert($data);
-    //     return redirect()->back()->with('status','Student Added Successfully');
-    // }
-
-
     public function select(Request $request)
     {
-   
+
         $country_id = $request->input('country_id');
         $state_id = $request->input('state_id');
         $city_id = $request->input('city_id');
         $name = $request->input('name');
-    
+
         if (is_array($city_id)) {
             foreach ($city_id as $cityid) {
                 $user = new Dropdoun;
@@ -87,14 +55,11 @@ class DropdownController extends Controller
                 $user->city_id = $cityid;
                 $user->save();
             }
-    
-            return redirect('/')->with('status', 'Test Added Successfully');
 
+            return redirect('/')->with('status', 'Test Added Successfully');
         } else {
-           
+
             return redirect()->back()->with('error', 'Invalid data for cs_id');
         }
     }
-    
-
 }
